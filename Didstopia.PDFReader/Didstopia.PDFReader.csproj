@@ -16,6 +16,7 @@
     <PackageTags>pdf reader .net standard library</PackageTags>
     <Title>PDF Reader</Title>
     <Description>A .NET Standard library for reading PDF files.</Description>
+    <PackageId>Didstopia.PDFReader</PackageId>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">

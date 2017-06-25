@@ -65,3 +65,4 @@ branches:
 cache:
   directories:
   - $HOME/.nuget/packages
+  - $HOME/.dotnet

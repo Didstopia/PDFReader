@@ -1,0 +1,68 @@
+ # Main language/toolchain
+language: csharp
+
+# Mono is not required for this project
+mono: none
+
+# Install .NET Core
+dotnet: 1.0.4
+
+# Operating systems to test against
+os:
+  - linux
+  - osx
+
+# Disable sudo to enable running inside a container
+sudo: false
+
+# Default linux distro (Ubuntu 14.04)
+dist: trusty
+
+# Default Xcode/macOS version (macOS 10.12)
+osx_image: xcode8.3
+
+# Global environment variables
+env:
+- BUILD_CONFIG="Debug" CACHE_NAME="Debug Build Cache" DOTNET_CLI_TELEMETRY_OPTOUT=1
+- BUILD_CONFIG="Release" CACHE_NAME="Release Build Cache" DOTNET_CLI_TELEMETRY_OPTOUT=1
+
+# Install dependencies
+install:
+  - bash <(curl -s https://raw.githubusercontent.com/dotnet/cli/master/scripts/obtain/dotnet-install.sh) --channel "LTS" --version "latest"
+  - bash <(curl -s https://raw.githubusercontent.com/dotnet/cli/master/scripts/obtain/dotnet-install.sh) --channel "2.0" --version "2.0.0-preview3-006540"
+  - bash <(curl -s https://raw.githubusercontent.com/dotnet/cli/master/scripts/obtain/dotnet-install.sh) --channel "2.0" --version "latest"
+
+# Setup for the build script
+before_script:
+  - export PATH=$HOME/.dotnet:$PATH
+
+# Build script
+script:
+  - dotnet restore
+  - dotnet build --configuration ${BUILD_CONFIG}
+  - dotnet test --configuration ${BUILD_CONFIG} Didstopia.PDFReader.Tests
+  - dotnet pack --configuration ${BUILD_CONFIG}
+
+# Additional jobs that run after tests
+jobs:
+  include:
+    - stage: deploy
+      env: BUILD_CONFIG="Release" DOTNET_CLI_TELEMETRY_OPTOUT=1
+      os: linux
+      script: skip
+      deploy:
+        provider: script
+        script: .scripts/deploy.sh $BUILD_CONFIG $NUGET_API_KEY
+        on:
+          tags: true
+
+# Only build the master branch
+branches:
+  only:
+    - master
+
+# Setup caching
+cache:
+  directories:
+  - $HOME/.nuget/packages
+  - $HOME/.dotnet/NuGetFallbackFolder

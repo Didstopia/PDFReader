@@ -1,0 +1,27 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Didstopia.PDFReader", "Didstopia.PDFReader\Didstopia.PDFReader.csproj", "{15BC8A93-874A-46CC-A07C-1F1C2C2F6057}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Didstopia.PDFReader.Tests", "Didstopia.PDFReader.Tests\Didstopia.PDFReader.Tests.csproj", "{168967F2-2F8F-4868-8BC9-8773B9287AAD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{15BC8A93-874A-46CC-A07C-1F1C2C2F6057}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15BC8A93-874A-46CC-A07C-1F1C2C2F6057}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15BC8A93-874A-46CC-A07C-1F1C2C2F6057}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15BC8A93-874A-46CC-A07C-1F1C2C2F6057}.Release|Any CPU.Build.0 = Release|Any CPU
+		{168967F2-2F8F-4868-8BC9-8773B9287AAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{168967F2-2F8F-4868-8BC9-8773B9287AAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{168967F2-2F8F-4868-8BC9-8773B9287AAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{168967F2-2F8F-4868-8BC9-8773B9287AAD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		description = A .NET Standard library for reading PDF files.
+		version = 0.0.1-beta1
+	EndGlobalSection
+EndGlobal

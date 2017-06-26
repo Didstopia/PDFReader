@@ -23,7 +23,7 @@ namespace Didstopia.PDFReader.Utils
             httpRequest.AllowAutoRedirect = true;
 
             HttpWebResponse httpResponse = await httpRequest.GetResponseAsync() as HttpWebResponse;
-
+           
             var tempFilePath = Path.GetTempFileName();
             Stream httpResponseStream = httpResponse.GetResponseStream();
             using (var fs = File.Create(tempFilePath))

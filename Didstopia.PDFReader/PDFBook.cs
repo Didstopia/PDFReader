@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 using Didstopia.PDFReader.Utils;
-using PdfSharp.Pdf;
-using PdfSharp.Pdf.IO;
+using Didstopia.PDFSharp.Pdf;
+using Didstopia.PDFSharp.Pdf.IO;
 
 namespace Didstopia.PDFReader
 {

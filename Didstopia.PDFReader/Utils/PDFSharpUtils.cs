@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using PdfSharp.Pdf;
-using PdfSharp.Pdf.Content;
-using PdfSharp.Pdf.Content.Objects;
+﻿using System.Collections.Generic;
+using Didstopia.PDFSharp.Pdf;
+using Didstopia.PDFSharp.Pdf.Content;
+using Didstopia.PDFSharp.Pdf.Content.Objects;
 
 namespace Didstopia.PDFReader.Utils
 {

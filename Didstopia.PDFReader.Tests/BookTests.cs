@@ -17,7 +17,8 @@ namespace Didstopia.PDFReader.Tests
         [Theory]
         [InlineData(SampleBookLocalPath)]
         [InlineData(SampleBookRemotePath)]
-        // TODO: Pending on an issue with our custom PDFSharp library
+        // TODO: Pending on an issue with our custom PDFSharp library:
+        //       https://github.com/Didstopia/PDFReader/issues/9
         //[InlineData(SampleBookWithPasswordRemotePath)]
         public void TestBookParsing(string filePath)
         {
@@ -28,7 +29,8 @@ namespace Didstopia.PDFReader.Tests
         [Theory]
         [InlineData(SampleBookLocalPath)]
         [InlineData(SampleBookRemotePath)]
-        // TODO: Pending on an issue with our custom PDFSharp library
+        // TODO: Pending on an issue with our custom PDFSharp library:
+        //       https://github.com/Didstopia/PDFReader/issues/9
         //[InlineData(SampleBookWithPasswordRemotePath)]
         public async void TestBookParsingAsync(string filePath)
         {

@@ -4,7 +4,7 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <RuntimeFrameworkVersion>2.0.0-*</RuntimeFrameworkVersion>
     <IsPackable>false</IsPackable>
-    <ReleaseVersion>1.0.0-beta4</ReleaseVersion>
+    <ReleaseVersion>1.0.0-beta5</ReleaseVersion>
     <Description>A .NET Standard 2.0 library for reading PDF files.</Description>
   </PropertyGroup>
 
@@ -26,6 +26,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Samples\pdf-sample.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Samples\pdf-ocr-sample.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

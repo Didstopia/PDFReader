@@ -16,6 +16,8 @@ namespace Didstopia.PDFReader
         public string Title { get; }
 
         public int PageCount => Pages.Count();
+
+        public bool IsOCR { get; private set; }
         #endregion
 
         #region Constructor
@@ -46,19 +48,40 @@ namespace Didstopia.PDFReader
         #region Utility methods
         private void ProcessPDF(PdfDocument pdfDocument)
         {
+            IsOCR = DetectOCR(pdfDocument);
+
             // Separate the PDF contents to page objects
             foreach (var page in pdfDocument.Pages)
             {
                 // TODO: Apply formatting to the text (escape, replace etc.)
 
                 // Construct the page contents
-                var pageContents = "";
+                var pageContents = string.Empty;
                 foreach (string text in page.ExtractText())
                     pageContents += text;
 
+                // Page is empty or requires OCR
+                if (string.IsNullOrWhiteSpace(pageContents))
+                {
+                    
+                }
+
                 // Create a new page object, passing in the string contents
-                Pages.Add(new PDFPage(pageContents));
+                if (!string.IsNullOrWhiteSpace(pageContents))
+                    Pages.Add(new PDFPage(pageContents));
             }
+        }
+
+        // TODO: This is a rather poor implementation of detecting OCR content
+        private bool DetectOCR(PdfDocument pdfDocument)
+        {
+            var foundText = false;
+            foreach (var page in pdfDocument.Pages)
+                foreach (var text in page.ExtractText())
+                    if (!string.IsNullOrWhiteSpace(text))
+                        foundText = true;
+            
+            return !foundText;
         }
         #endregion
     }

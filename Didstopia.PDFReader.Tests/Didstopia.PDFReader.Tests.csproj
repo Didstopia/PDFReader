@@ -6,7 +6,7 @@
     <IsPackable>false</IsPackable>
     <VersionPrefix>0.0.1</VersionPrefix>
     <VersionSuffix></VersionSuffix>
-    <ReleaseVersion>0.0.1</ReleaseVersion>
+    <ReleaseVersion>1.0.0-beta5</ReleaseVersion>
     <Description>A .NET Standard 2.0 library for reading PDF files.</Description>
   </PropertyGroup>
 

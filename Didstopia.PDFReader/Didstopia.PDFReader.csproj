@@ -26,7 +26,7 @@ Fixed missing license attributions.</PackageReleaseNotes>
     <DebugType>pdbonly</DebugType>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Didstopia.PDFSharp" Version="1.0.0-beta2" />
+    <PackageReference Include="Didstopia.PDFSharp" Version="1.0.0-beta3" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Utils\" />

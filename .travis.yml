@@ -4,62 +4,57 @@ language: csharp
 # Mono is not required for this project
 mono: none
 
-# Install .NET Core
-dotnet: 1.0.4
+# Install .NET Core 2.0
+dotnet: 2.0.0-preview2-006497
 
-# Operating systems to test against
-os:
-  - linux
-  - osx
+# Run Ubuntu Trusty
+dist: trusty
 
 # Disable sudo to enable running inside a container
 sudo: false
 
-# Default linux distro (Ubuntu 14.04)
-dist: trusty
+# Skip the installation step
+install: true
 
-# Default Xcode/macOS version (macOS 10.12)
-osx_image: xcode8.3
-
-# Global environment variables
-env:
-- BUILD_CONFIG="Debug" DOTNET_CLI_TELEMETRY_OPTOUT=1
-- BUILD_CONFIG="Release" DOTNET_CLI_TELEMETRY_OPTOUT=1
-
-# Install dependencies
-install:
-  - bash <(curl -s https://raw.githubusercontent.com/dotnet/cli/master/scripts/obtain/dotnet-install.sh) --channel "LTS" --version "latest"
-  - bash <(curl -s https://raw.githubusercontent.com/dotnet/cli/master/scripts/obtain/dotnet-install.sh) --channel "2.0" --version "2.0.0-preview3-006540"
-  - bash <(curl -s https://raw.githubusercontent.com/dotnet/cli/master/scripts/obtain/dotnet-install.sh) --channel "2.0" --version "latest"
-
-# Setup for the build script
-before_script:
-  - export PATH=$HOME/.dotnet:$PATH
-
-# Build script
-script:
-  - dotnet restore
-  - dotnet build --configuration ${BUILD_CONFIG}
-  - dotnet test --configuration ${BUILD_CONFIG} Didstopia.PDFReader.Tests
-  - dotnet pack --configuration ${BUILD_CONFIG}
-
+# Additional jobs that run after tests
 jobs:
+  fast_finish: true
   include:
-    - stage: NuGet
+
+    - stage: Build and Test
+      script:
+        - dotnet restore
+        - dotnet build -c ${BUILD_CONFIG}
+        - dotnet test -c ${BUILD_CONFIG} --no-build Didstopia.PDFReader.Tests
+        - dotnet pack -c ${BUILD_CONFIG} --no-build
+
+    - stage: Deploy to MyGet
       script: skip
-      env: BUILD_CONFIG="Release" DOTNET_CLI_TELEMETRY_OPTOUT=1
-      os: linux
       deploy:
         provider: script
-        script: ".scripts/deploy.sh $BUILD_CONFIG $NUGET_API_KEY"
+        script: .scripts/deploy.sh $BUILD_CONFIG $MYGET_API_KEY $MYGET_FEED
         skip_cleanup: true
         on:
           repo: Didstopia/PDFReader
+          branch: development
+          tags: false
+
+    - stage: Deploy to NuGet
+      script: skip
+      deploy:
+        provider: script
+        script: .scripts/deploy.sh $BUILD_CONFIG $NUGET_API_KEY "" $TRAVIS_TAG
+        skip_cleanup: true
+        on:
+          repo: Didstopia/PDFReader
+          branch: master
           tags: true
-    - stage: GitHub Release
-      script: dotnet restore && dotnet build -c $BUILD_CONFIG && dotnet pack -c $BUILD_CONFIG
-      env: BUILD_CONFIG="Release" DOTNET_CLI_TELEMETRY_OPTOUT=1
-      os: linux
+
+    - stage: Deploy to GitHub
+      script:
+        - dotnet restore /p:PackageVersion=${TRAVIS_TAG#v}
+        - dotnet build -c $BUILD_CONFIG /p:PackageVersion=${TRAVIS_TAG#v}
+        - dotnet pack -c $BUILD_CONFIG --no-build /p:PackageVersion=${TRAVIS_TAG#v}
       deploy:
         provider: releases
         api_key: $GITHUB_OAUTH_TOKEN
@@ -68,15 +63,5 @@ jobs:
         skip_cleanup: true
         on:
           repo: Didstopia/PDFReader
+          branch: master
           tags: true
-
-# Only build the master branch, as well as tags
-branches:
-  only:
-    - master
-    - /^v\d+\.\d+(\.\d+)?(-\S*)?$/
-
-cache:
-  directories:
-    - $HOME/.nuget/packages
-    - $HOME/.dotnet/NuGetFallbackFolder

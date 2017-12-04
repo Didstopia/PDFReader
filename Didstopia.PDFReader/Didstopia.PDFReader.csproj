@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <VersionPrefix>0.0.1</VersionPrefix>
     <VersionSuffix></VersionSuffix>
-    <ReleaseVersion>1.0.0-beta5</ReleaseVersion>
+    <ReleaseVersion>1.0.0-beta6</ReleaseVersion>
     <Authors>Didstopia</Authors>
     <DevelopmentDependency>true</DevelopmentDependency>
     <NeutralLanguage>en-US</NeutralLanguage>

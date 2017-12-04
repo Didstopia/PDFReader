@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <VersionPrefix>0.0.1</VersionPrefix>
     <VersionSuffix></VersionSuffix>
-    <ReleaseVersion>1.0.0-beta5</ReleaseVersion>
+    <ReleaseVersion>1.0.0-beta6</ReleaseVersion>
     <Authors>Didstopia</Authors>
     <DevelopmentDependency>true</DevelopmentDependency>
     <NeutralLanguage>en-US</NeutralLanguage>
@@ -26,7 +26,7 @@ Fixed missing license attributions.</PackageReleaseNotes>
     <DebugType>pdbonly</DebugType>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Didstopia.PDFSharp" Version="1.0.0-beta3" />
+    <PackageReference Include="Didstopia.PDFSharp" Version="1.0.0-beta4" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Utils\" />
